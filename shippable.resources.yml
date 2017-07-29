@@ -6,7 +6,7 @@ resources:
     type: gitRepo
     integration: "trriplejay github"
     pointer:
-      sourceName: SoftServ/waffle-cone
+      sourceName: SoftSrv/waffle-cone
       branch: master
 
   - name: terraform_params
