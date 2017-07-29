@@ -1,0 +1,15 @@
+resources:
+  - name: tfState
+    type: state
+
+  - name: waffle_cone_repo
+    type: gitRepo
+    pointer:
+      sourceName: SoftServ/waffle-cone
+      branch: master
+
+  - name: terraform_params
+    type: params
+    version:
+      params:
+        ACTION: apply

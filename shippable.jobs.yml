@@ -1,0 +1,17 @@
+jobs:
+
+  - name: provision
+    type: runSh
+    steps:
+      - IN: waffle_cone_repo
+      - IN: terraform_params
+      - IN: tfState
+        switch: off
+      - OUT: tfState
+      - TASK:
+        - script: cp /build/IN/tfState/state/terraform.tfstate $WAFFLE_CONE_REPO_STATE/
+        - script: cd $WAFFLE_CONE_REPO_STATE
+        - script: terraform plan
+        - script: terraform $TFACTION
+    always:
+      - script: cp $WAFFLE_CONE_REPO_STATE/terraform.tfstate /build/OUT/tfState/state
