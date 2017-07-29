@@ -10,6 +10,7 @@ jobs:
       - IN: tfState
         switch: off
       - TASK:
+        - script: tree /build
         - script: IN_STATE=/build/IN/tfState/state/state
         - script: if [ -f $IN_STATE/terraform.tfstate ]; then cp $IN_STATE/terraform.tfstate $WAFFLE_CONE_REPO_STATE/ ; fi
         - script: ls $IN_STATE
