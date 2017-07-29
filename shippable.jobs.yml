@@ -8,13 +8,13 @@ jobs:
       - IN: softsrv_aws_creds
       - IN: tfState
         switch: off
-      - OUT: tfState
       - TASK:
-        - script: IN_STATE=/build/IN/tfState/state/
+        - script: IN_STATE=/build/IN/tfState/state/state
         - script: if [ -f $IN_STATE/terraform.tfstate ]; then cp $IN_STATE/terraform.tfstate $WAFFLE_CONE_REPO_STATE/ ; fi
         - script: cd $WAFFLE_CONE_REPO_STATE
-        - script: terraform plan
         - script: terraform $TFACTION
+      - OUT: tfState
     always:
-      - script: OUT_STATE=/build/OUT/tfState/state
-      - script: if [ -f $WAFFLE_CONE_REPO_STATE/terraform.tfstate ]; then cp $WAFFLE_CONE_REPO_STATE/terraform.tfstate $OUT_STATE; fi
+      - script: echo 'save state if we created it'
+      - script: OUT_STATE=/build/OUT/tfState/state/state
+      - script: if [ -f $WAFFLE_CONE_REPO_STATE/terraform.tfstate ]; then cp $WAFFLE_CONE_REPO_STATE/terraform.tfstate $OUT_STATE ; fi
