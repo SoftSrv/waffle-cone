@@ -5,6 +5,7 @@ jobs:
     steps:
       - IN: waffle_cone_repo
       - IN: terraform_params
+      - IN: softsrv_aws_creds
       - IN: tfState
         switch: off
       - OUT: tfState

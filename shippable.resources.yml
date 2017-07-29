@@ -4,6 +4,7 @@ resources:
 
   - name: waffle_cone_repo
     type: gitRepo
+    integration: "trriplejay github"
     pointer:
       sourceName: SoftServ/waffle-cone
       branch: master
@@ -12,4 +13,4 @@ resources:
     type: params
     version:
       params:
-        ACTION: apply
+        TFACTION: apply
