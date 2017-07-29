@@ -10,9 +10,11 @@ jobs:
         switch: off
       - OUT: tfState
       - TASK:
-        - script: cp /build/IN/tfState/state/terraform.tfstate $WAFFLE_CONE_REPO_STATE/
+        - script: IN_STATE=/build/IN/tfState/state/
+        - script: if [ -f $IN_STATE/terraform.tfstate ]; then cp $IN_STATE/terraform.tfstate $WAFFLE_CONE_REPO_STATE/ ; fi
         - script: cd $WAFFLE_CONE_REPO_STATE
         - script: terraform plan
         - script: terraform $TFACTION
     always:
-      - script: cp $WAFFLE_CONE_REPO_STATE/terraform.tfstate /build/OUT/tfState/state
+      - script: OUT_STATE=/build/OUT/tfState/state
+      - script: if [ -f $WAFFLE_CONE_REPO_STATE/terraform.tfstate ]; then cp $WAFFLE_CONE_REPO_STATE/terraform.tfstate $OUT_STATE; fi
