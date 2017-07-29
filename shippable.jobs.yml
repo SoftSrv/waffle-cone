@@ -23,6 +23,6 @@ jobs:
     always:
       - script: echo 'save state if we created it'
       - script: OUT_STATE=/build/OUT/tfState/state
-      - script: cp $WAFFLE_CONE_REPO_STATE/terraform.tfstate $OUT_STATE ; fi
+      - script: cp $WAFFLE_CONE_REPO_STATE/terraform.tfstate $OUT_STATE
       - script: ls -al $OUT_STATE
       - script: tree /build
