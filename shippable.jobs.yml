@@ -4,6 +4,7 @@ jobs:
     type: runSh
     steps:
       - IN: waffle_cone_repo
+        switch: off
       - IN: terraform_params
       - IN: softsrv_aws_creds
       - IN: tfState
