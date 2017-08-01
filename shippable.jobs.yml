@@ -32,8 +32,10 @@ jobs:
       - IN: softsrv_aws_creds
       - TASK:
         - script: cd $WAFFLE_CONE_REPO_STATE/packer
-        - script: packer build ami-definition.json > $JOB_STATE/output.txt
-        - script: AMI=$(tail -n1 $JOB_STATE/output.txt | awk '{print $2}')
-        - script: echo 'versionName=$AMI >> $JOB_STATE/$JOB_NAME.env'
+        - script: packer build ami-definition.json 2>&1 | tee $JOB_STATE/output.txt
+        - script: export AMI=$(tail -n1 $JOB_STATE/output.txt | awk '{print $2}')
+        - script: echo 'versionName=$AMI' >> $JOB_STATE/$JOB_NAME.env
     on_failure:
       - script: cat $JOB_STATE/output.txt
+    on_success:
+      - script: 'successfully built AMI $AMI'
