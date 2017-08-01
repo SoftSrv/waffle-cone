@@ -10,7 +10,7 @@
     "region": "us-east-1",
     "source_ami": "ami-a4c7edb2",
     "instance_type": "t2.micro",
-    "ssh_username": "ubuntu",
+    "ssh_username": "ec2-user",
     "ssh_keypair_name": "common-key",
     "ssh_agent_auth": true,
     "ami_name": "packer-example {{timestamp}}"
