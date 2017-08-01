@@ -35,3 +35,5 @@ jobs:
         - script: packer build ami-definition.json > $JOB_STATE/output.txt
         - script: AMI=$(tail -n1 $JOB_STATE/output.txt | awk '{print $2}')
         - script: echo 'versionName=$AMI >> $JOB_STATE/$JOB_NAME.env'
+      - on_failure:
+        - script: cat $JOB_STATE/output.txt
