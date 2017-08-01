@@ -27,7 +27,6 @@ jobs:
   - name: pack
     type: runSh
     steps:
-      - IN: softsrv-ssh
       - IN: waffle_cone_repo
         switch: off
       - IN: softsrv_aws_creds
