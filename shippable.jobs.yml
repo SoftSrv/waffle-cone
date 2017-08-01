@@ -7,15 +7,31 @@ jobs:
         switch: off
       - IN: terraform_params
       - IN: softsrv_aws_creds
+      - IN: pack
+        switch: off
       - IN: tfState
         switch: off
       - TASK:
         - script: IN_STATE=/build/IN/tfState/state
         - script: if [ -f $IN_STATE/terraform.tfstate ]; then cp $IN_STATE/terraform.tfstate $WAFFLE_CONE_REPO_STATE/ ; fi
         - script: cd $WAFFLE_CONE_REPO_STATE
+        - script: LATEST_AMI=$PACK_VERSIONNAME
+        - script: shippable_replace terraform.tfvars
         - script: terraform $TFACTION
       - OUT: tfState
     always:
       - script: echo 'save state if we created it'
       - script: OUT_STATE=/build/OUT/tfState/state
       - script: cp $WAFFLE_CONE_REPO_STATE/terraform.tfstate $OUT_STATE
+
+  - name: pack
+    type: runSh
+    steps:
+      - IN: waffle_cone_repo
+        switch: off
+      - IN: softsrv_aws_creds
+      - TASK:
+        - script: cd $WAFFLE_CONE_REPO_STATE/packer
+        - script: packer build ami-definition.json > $JOB_STATE/output.txt
+        - script: AMI=$(tail -n1 $JOB_STATE/output.txt | awk '{print $2}')
+        - script: echo 'versionName=$AMI >> $JOB_STATE/$JOB_NAME.env'

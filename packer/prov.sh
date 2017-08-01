@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sudo yum update
-sudo yum install docker
+sudo yum install -y docker
 
 sudo usermod -aG docker $USER
 sudo service docker start
