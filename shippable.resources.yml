@@ -14,7 +14,3 @@ resources:
     version:
       params:
         TFACTION: apply
-
-  - name: softsrv-ssh
-    type: integration
-    integration: softsrv-pem
