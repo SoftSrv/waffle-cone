@@ -15,7 +15,7 @@ jobs:
         - script: IN_STATE=/build/IN/tfState/state
         - script: if [ -f $IN_STATE/terraform.tfstate ]; then cp $IN_STATE/terraform.tfstate $WAFFLE_CONE_REPO_STATE/ ; fi
         - script: cd $WAFFLE_CONE_REPO_STATE
-        - script: LATEST_AMI=$PACK_VERSIONNAME
+        - script: export LATEST_AMI=$PACK_VERSIONNAME
         - script: shippable_replace terraform.tfvars
         - script: terraform $TFACTION
       - OUT: tfState
