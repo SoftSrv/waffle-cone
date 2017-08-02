@@ -8,12 +8,12 @@ resource "aws_instance" "example" {
   key_name = "common-key"
 
   provisioner "local-exec" {
-    command = "export PUBLIC_IP=${aws_instance.example.public_ip}"
+    command = "echo \"versionName=${aws_instance.example.public_ip}\" >> ${var.JOB_ENV_FILE}"
   }
-  
+
   provisioner "remote-exec" {
     inline = [
-      "docker run -d softsrv/minecraft:1.12",
+      "docker run -d -p 25565:25565 softsrv/minecraft:1.12",
     ]
 
     connection {
