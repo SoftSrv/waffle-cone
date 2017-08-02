@@ -7,5 +7,5 @@ variable "AMI_ID" {
 }
 
 variable "PEM_KEY" {
-  default = ""
+  default = "hello"
 }
