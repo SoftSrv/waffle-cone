@@ -9,3 +9,7 @@ variable "AMI_ID" {
 variable "PEM_KEY" {
   default = "hello"
 }
+
+variable "JOB_ENV_FILE" {
+  default = "/build/state/provision.env"
+}

@@ -18,8 +18,6 @@ jobs:
         - script: cd $WAFFLE_CONE_REPO_STATE
         - script: export LATEST_AMI=$PACK_VERSIONNAME
         - script: shippable_replace terraform.tfvars
-        - script: printenv | grep SOFTSRV
-        - script: echo "KEYFILE PATH IS - $SOFTSRV_PEM_KEYFILE"
         - script: terraform $TFACTION
       - OUT: tfState
     always:
