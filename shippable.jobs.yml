@@ -18,6 +18,7 @@ jobs:
         - script: cd $WAFFLE_CONE_REPO_STATE
         - script: export LATEST_AMI=$PACK_VERSIONNAME
         - script: shippable_replace terraform.tfvars
+        - script: echo "$SOFTSRV_PEM_KEYFILE"
         - script: terraform $TFACTION
       - OUT: tfState
     always:
