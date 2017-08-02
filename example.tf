@@ -10,6 +10,7 @@ resource "aws_instance" "example" {
   provisioner "local-exec" {
     command = "export PUBLIC_IP=${aws_instance.example.public_ip}"
   }
+  
   provisioner "remote-exec" {
     inline = [
       "docker run -d softsrv/minecraft:1.12",
@@ -17,7 +18,7 @@ resource "aws_instance" "example" {
 
     connection {
       user     = "ec2-user"
-      private_key = "${var.PEM_KEY}"
+      private_key = "${file(var.PEM_KEY)}"
     }
   }
 }
