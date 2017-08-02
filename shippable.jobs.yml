@@ -23,6 +23,8 @@ jobs:
       - script: echo 'save state if we created it'
       - script: OUT_STATE=/build/OUT/tfState/state
       - script: cp $WAFFLE_CONE_REPO_STATE/terraform.tfstate $OUT_STATE
+    on_success:
+      - script: echo "versionName=$PUBLIC_IP" >> $JOB_STATE/$JOB_NAME.env
 
   - name: pack
     type: runSh
