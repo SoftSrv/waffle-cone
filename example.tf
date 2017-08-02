@@ -14,5 +14,10 @@ resource "aws_instance" "example" {
     inline = [
       "docker run -d softsrv/minecraft:1.12",
     ]
+
+    connection {
+      user     = "ec2-user"
+      private_key = "${var.PEM_KEY}"
+    }
   }
 }

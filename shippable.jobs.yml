@@ -5,6 +5,7 @@ jobs:
     steps:
       - IN: waffle_cone_repo
         switch: off
+      - IN: softsrv-pem
       - IN: terraform_params
       - IN: softsrv_aws_creds
       - IN: pack

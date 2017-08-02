@@ -14,3 +14,8 @@ resources:
     version:
       params:
         TFACTION: apply
+
+
+  - name: softsrv-pem
+    type: integration
+    integration: softsrv-pem
