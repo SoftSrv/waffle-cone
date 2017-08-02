@@ -5,7 +5,7 @@ jobs:
     steps:
       - IN: waffle_cone_repo
         switch: off
-      - IN: softsrv-pem
+      - IN: softsrv_pem
       - IN: terraform_params
       - IN: softsrv_aws_creds
       - IN: pack
@@ -18,7 +18,8 @@ jobs:
         - script: cd $WAFFLE_CONE_REPO_STATE
         - script: export LATEST_AMI=$PACK_VERSIONNAME
         - script: shippable_replace terraform.tfvars
-        - script: echo "$SOFTSRV_PEM_KEYFILE"
+        - script: printenv | grep SOFTSRV
+        - script: echo "KEYFILE PATH IS - $SOFTSRV_PEM_KEYFILE"
         - script: terraform $TFACTION
       - OUT: tfState
     always:

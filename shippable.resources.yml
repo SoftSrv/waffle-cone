@@ -16,6 +16,6 @@ resources:
         TFACTION: apply
 
 
-  - name: softsrv-pem
+  - name: softsrv_pem
     type: integration
     integration: softsrv-pem
