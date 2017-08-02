@@ -1,1 +1,1 @@
-AMI_ID=${LATEST_AMI}
+AMI_ID = "${LATEST_AMI}"
