@@ -6,7 +6,6 @@ jobs:
       - IN: waffle_cone_repo
         switch: off
       - IN: softsrv_pem
-      - IN: terraform_params
       - IN: softsrv_aws_creds
       - IN: pack
         switch: off
@@ -18,14 +17,37 @@ jobs:
         - script: cd $WAFFLE_CONE_REPO_STATE
         - script: export LATEST_AMI=$PACK_VERSIONNAME
         - script: shippable_replace terraform.tfvars
-        - script: terraform $TFACTION
+        - script: terraform plan
+        - script: terraform apply
       - OUT: tfState
     always:
       - script: echo 'save state if we created it'
       - script: OUT_STATE=/build/OUT/tfState/state
       - script: cp $WAFFLE_CONE_REPO_STATE/terraform.tfstate $OUT_STATE
     on_success:
+      - script: PUBLIC_IP=$(terraform output machine_ip)
       - script: echo "versionName=$PUBLIC_IP" >> $JOB_STATE/$JOB_NAME.env
+
+- name: destroy
+  type: runSh
+  steps:
+    - IN: waffle_cone_repo
+      switch: off
+    - IN: softsrv_aws_creds
+    - IN: tfState
+      switch: off
+    - TASK:
+      - script: IN_STATE=/build/IN/tfState/state
+      - script: if [ -f $IN_STATE/terraform.tfstate ]; then cp $IN_STATE/terraform.tfstate $WAFFLE_CONE_REPO_STATE ; fi
+      - script: cd $WAFFLE_CONE_REPO_STATE
+      - script: shippable_replace terraform.tfvars
+      - script: terraform destroy
+    - OUT: tfState
+  always:
+    - script: echo 'if statefile still exists, propagate it'
+    - script: OUT_STATE="/build/OUT/tfState/state"
+    - script: cp $WAFFLE_CONE_REPO_STATE/terraform.tfstate $OUT_STATE
+
 
   - name: pack
     type: runSh
