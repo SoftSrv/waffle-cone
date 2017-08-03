@@ -21,10 +21,12 @@ jobs:
         - script: terraform apply
       - OUT: tfState
     always:
+      - script: cd $WAFFLE_CONE_REPO_STATE
       - script: echo 'save state if we created it'
       - script: OUT_STATE=/build/OUT/tfState/state
-      - script: cp $WAFFLE_CONE_REPO_STATE/terraform.tfstate $OUT_STATE
+      - script: cp terraform.tfstate $OUT_STATE
     on_success:
+      - script: cd $WAFFLE_CONE_REPO_STATE
       - script: PUBLIC_IP=$(terraform output machine_ip)
       - script: echo "versionName=$PUBLIC_IP" >> $JOB_STATE/$JOB_NAME.env
 
@@ -46,9 +48,10 @@ jobs:
         - script: terraform destroy
       - OUT: tfState
     always:
+      - script: cd $WAFFLE_CONE_REPO_STATE
       - script: echo 'if statefile still exists, propagate it'
       - script: OUT_STATE="/build/OUT/tfState/state"
-      - script: cp $WAFFLE_CONE_REPO_STATE/terraform.tfstate $OUT_STATE
+      - script: cp terraform.tfstate $OUT_STATE
 
   - name: pack
     type: runSh
