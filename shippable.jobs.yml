@@ -45,7 +45,7 @@ jobs:
         - script: if [ -f $IN_STATE/terraform.tfstate ]; then cp $IN_STATE/terraform.tfstate $WAFFLE_CONE_REPO_STATE ; fi
         - script: cd $WAFFLE_CONE_REPO_STATE
         - script: shippable_replace terraform.tfvars
-        - script: terraform destroy
+        - script: terraform destroy -force
       - OUT: tfState
     always:
       - script: cd $WAFFLE_CONE_REPO_STATE
