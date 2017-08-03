@@ -54,6 +54,8 @@ jobs:
       - IN: waffle_cone_repo
         switch: off
       - IN: softsrv_aws_creds
+      - IN: minecraft_img_1.12
+      - IN: minecraft_img_1.11.2
       - TASK:
         - script: cd $WAFFLE_CONE_REPO_STATE/packer
         - script: packer build ami-definition.json 2>&1 | tee $JOB_STATE/output.txt
