@@ -34,6 +34,8 @@ jobs:
       - IN: waffle_cone_repo
         switch: off
       - IN: softsrv_aws_creds
+      - IN: pack
+        switch: off
       - IN: tfState
         switch: off
       - TASK:
