@@ -21,8 +21,7 @@ resource "aws_instance" "example" {
       private_key = "${file(var.PEM_KEY)}"
     }
   }
-
-  output "machine_ip" {
-    value = "${aws_instance.example.public_ip}"
-   }
+}
+output "machine_ip" {
+  value = "${aws_instance.example.public_ip}"
 }

@@ -9,13 +9,6 @@ resources:
       sourceName: SoftSrv/waffle-cone
       branch: master
 
-  - name: terraform_params
-    type: params
-    version:
-      params:
-        TFACTION: apply
-
-
   - name: softsrv_pem
     type: integration
     integration: softsrv-pem
