@@ -12,3 +12,7 @@ resources:
   - name: softsrv_pem
     type: integration
     integration: softsrv-pem
+
+  - name: softsrv_aws_creds
+    type: integration
+    integration: "softsrv aws keyval"
