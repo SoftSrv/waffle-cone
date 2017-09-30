@@ -13,7 +13,7 @@ resource "aws_instance" "example" {
 
   provisioner "remote-exec" {
     inline = [
-      "docker run -d -p 25565:25565 softsrv/minecraft:1.12",
+      "docker run -d -p 25565:25565 --restart always softsrv/minecraft:1.12.2",
     ]
 
     connection {
