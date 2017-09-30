@@ -60,7 +60,9 @@ jobs:
         switch: off
       - IN: softsrv_aws_creds
       - IN: minecraft_img_1.11.2
+        switch: off
       - IN: minecraft_img_1.12
+        switch: off
       - IN: minecraft_img_1.12.2
       - TASK:
         - script: cd $WAFFLE_CONE_REPO_STATE/packer
